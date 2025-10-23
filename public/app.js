@@ -36,3 +36,9 @@ document.getElementById("callBtn").addEventListener("click", async () => {
     status.textContent = "❌ " + err.message;
   }
 });
+
+// Allow typing directly
+phoneInput.addEventListener("input", () => {
+  // Keep only digits, +, *, #
+  phoneInput.value = phoneInput.value.replace(/[^\d+*#]/g, "");
+});
