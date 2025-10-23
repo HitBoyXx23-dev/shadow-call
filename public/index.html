@@ -9,11 +9,38 @@
 <body>
   <div class="container">
     <h1>Shadow Call</h1>
-    <p class="tagline">Enter a number and speak through the shadows...</p>
+    <p class="tagline">Dial through the shadows...</p>
 
-    <input id="phone" type="text" placeholder="+14155552671" />
-    <textarea id="message" placeholder="Message to say..."></textarea>
-    <button id="callBtn">Call</button>
+    <input id="phone" type="text" placeholder="+1..." readonly />
+
+    <div class="dialpad">
+      <div class="row">
+        <button class="digit">1</button>
+        <button class="digit">2</button>
+        <button class="digit">3</button>
+      </div>
+      <div class="row">
+        <button class="digit">4</button>
+        <button class="digit">5</button>
+        <button class="digit">6</button>
+      </div>
+      <div class="row">
+        <button class="digit">7</button>
+        <button class="digit">8</button>
+        <button class="digit">9</button>
+      </div>
+      <div class="row">
+        <button class="digit">*</button>
+        <button class="digit">0</button>
+        <button class="digit">#</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="clearBtn" class="control-btn">Clear</button>
+      <button id="callBtn" class="call-btn">Call</button>
+    </div>
+
     <div id="status"></div>
   </div>
 
