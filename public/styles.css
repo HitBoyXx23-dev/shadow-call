@@ -10,18 +10,18 @@ body {
 }
 
 .container {
-  background: linear-gradient(145deg, #080818, #111133);
+  background: linear-gradient(145deg, #090920, #121244);
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(100, 0, 200, 0.4);
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(120, 0, 255, 0.3);
   width: 320px;
   text-align: center;
 }
 
 h1 {
   color: #a86fff;
-  margin-bottom: 10px;
   text-shadow: 0 0 10px #7d5dfc;
+  margin-bottom: 5px;
 }
 
 .tagline {
@@ -30,7 +30,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-input, textarea {
+#phone {
   width: 100%;
   margin: 8px 0;
   padding: 10px;
@@ -38,24 +38,70 @@ input, textarea {
   border-radius: 6px;
   background: #1a1a3a;
   color: #e0dfff;
+  font-size: 1.1em;
+  text-align: center;
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background: linear-gradient(90deg, #5d00ff, #1a47ff);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1em;
+.dialpad {
+  display: grid;
+  gap: 8px;
   margin-top: 10px;
-  transition: all 0.2s ease-in-out;
 }
 
-button:hover {
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.digit {
+  background: linear-gradient(145deg, #1a1a3a, #1f1f50);
+  border: none;
+  border-radius: 8px;
+  color: #e0dfff;
+  font-size: 1.3em;
+  width: 30%;
+  padding: 15px 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.digit:hover {
+  background: linear-gradient(145deg, #2a2a6a, #25255a);
+  transform: scale(1.05);
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.control-btn,
+.call-btn {
+  flex: 1;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.control-btn {
+  background: #333366;
+  color: #fff;
+}
+
+.call-btn {
+  background: linear-gradient(90deg, #5d00ff, #1a47ff);
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.call-btn:hover {
+  transform: scale(1.05);
   background: linear-gradient(90deg, #7a33ff, #2a6dff);
-  transform: scale(1.03);
 }
 
 #status {
