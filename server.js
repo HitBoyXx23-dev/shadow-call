@@ -21,6 +21,7 @@ function isE164(num) {
   return /^\+[1-9]\d{1,14}$/.test(num);
 }
 
+// ☎️ MAKE A CALL
 app.post("/call", async (req, res) => {
   const { to, message } = req.body;
   if (!to || !isE164(to)) {
@@ -37,8 +38,31 @@ app.post("/call", async (req, res) => {
     });
     res.json({ success: true, sid: call.sid });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
+    console.error("Call error:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// 💬 SEND MESSAGE
+app.post("/message", async (req, res) => {
+  const { to, body } = req.body;
+  if (!to || !isE164(to)) {
+    return res.status(400).json({ error: "Invalid phone number (use +countrycode... format)" });
+  }
+  if (!body || typeof body !== "string" || !body.trim()) {
+    return res.status(400).json({ error: "Message body is required." });
+  }
+
+  try {
+    const msg = await twilio.messages.create({
+      to,
+      from: TWILIO_NUMBER,
+      body: body.slice(0, 1600) // SMS limit safeguard
+    });
+    res.json({ success: true, sid: msg.sid });
+  } catch (err) {
+    console.error("Message error:", err);
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 
