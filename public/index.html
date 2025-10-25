@@ -11,8 +11,10 @@
     <h1>Shadow Call</h1>
     <p class="tagline">Dial through the shadows...</p>
 
+    <!-- Phone input -->
     <input id="phone" type="text" placeholder="+1..." />
 
+    <!-- Dialpad -->
     <div class="dialpad">
       <div class="row"><button class="digit">1</button><button class="digit">2</button><button class="digit">3</button></div>
       <div class="row"><button class="digit">4</button><button class="digit">5</button><button class="digit">6</button></div>
@@ -21,10 +23,17 @@
       <div class="row"><button class="digit">+</button></div>
     </div>
 
+    <!-- Controls -->
     <div class="controls">
       <button id="backspaceBtn" class="control-btn">⌫</button>
       <button id="clearBtn" class="control-btn">Clear</button>
-      <button id="callBtn" class="call-btn">Call</button>
+      <button id="callBtn" class="call-btn">📞 Call</button>
+    </div>
+
+    <!-- Message section -->
+    <div class="message-section">
+      <textarea id="message" placeholder="Type your message here..."></textarea>
+      <button id="sendMsgBtn" class="msg-btn">💬 Send Message</button>
     </div>
 
     <div id="status"></div>
