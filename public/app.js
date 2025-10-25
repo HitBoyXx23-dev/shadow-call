@@ -1,7 +1,8 @@
 const phoneInput = document.getElementById("phone");
+const messageInput = document.getElementById("message");
 const status = document.getElementById("status");
 
-// add characters from dial pad
+// Add digits from the dial pad
 document.querySelectorAll(".digit").forEach(btn => {
   btn.addEventListener("click", () => {
     phoneInput.value += btn.textContent;
@@ -9,16 +10,18 @@ document.querySelectorAll(".digit").forEach(btn => {
   });
 });
 
-// allow backspace and clear
+// Backspace and Clear
 document.getElementById("backspaceBtn").addEventListener("click", () => {
   phoneInput.value = phoneInput.value.slice(0, -1);
 });
+
 document.getElementById("clearBtn").addEventListener("click", () => {
   phoneInput.value = "";
+  messageInput.value = "";
   status.textContent = "";
 });
 
-// make the call
+// Make a call
 document.getElementById("callBtn").addEventListener("click", async () => {
   const phone = phoneInput.value.trim();
   if (!phone.startsWith("+")) {
@@ -26,7 +29,7 @@ document.getElementById("callBtn").addEventListener("click", async () => {
     return;
   }
 
-  status.textContent = "Calling...";
+  status.textContent = "📞 Calling...";
   try {
     const res = await fetch("/call", {
       method: "POST",
@@ -42,7 +45,37 @@ document.getElementById("callBtn").addEventListener("click", async () => {
   }
 });
 
-// only filter out disallowed characters (letters, spaces, etc.)
+// Send Message
+document.getElementById("sendMsgBtn").addEventListener("click", async () => {
+  const phone = phoneInput.value.trim();
+  const message = messageInput.value.trim();
+
+  if (!phone.startsWith("+")) {
+    status.textContent = "❌ Number must start with + (country code).";
+    return;
+  }
+  if (!message) {
+    status.textContent = "❌ Message cannot be empty.";
+    return;
+  }
+
+  status.textContent = "💬 Sending message...";
+  try {
+    const res = await fetch("/message", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ to: phone, body: message })
+    });
+    const data = await res.json();
+    status.textContent = data.success
+      ? `✅ Message sent! SID: ${data.sid}`
+      : `❌ ${data.error}`;
+  } catch (err) {
+    status.textContent = "❌ " + err.message;
+  }
+});
+
+// Filter invalid characters
 phoneInput.addEventListener("input", () => {
   phoneInput.value = phoneInput.value.replace(/[^0-9+*#]/g, "");
 });
