@@ -24,6 +24,8 @@ document.getElementById("clearBtn").addEventListener("click", () => {
 // Make a call
 document.getElementById("callBtn").addEventListener("click", async () => {
   const phone = phoneInput.value.trim();
+  const message = messageInput.value.trim();
+
   if (!phone.startsWith("+")) {
     status.textContent = "❌ Number must start with + (country code).";
     return;
@@ -34,7 +36,7 @@ document.getElementById("callBtn").addEventListener("click", async () => {
     const res = await fetch("/call", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to: phone })
+      body: JSON.stringify({ to: phone, message })
     });
     const data = await res.json();
     status.textContent = data.success
@@ -45,37 +47,7 @@ document.getElementById("callBtn").addEventListener("click", async () => {
   }
 });
 
-// Send Message
-document.getElementById("sendMsgBtn").addEventListener("click", async () => {
-  const phone = phoneInput.value.trim();
-  const message = messageInput.value.trim();
-
-  if (!phone.startsWith("+")) {
-    status.textContent = "❌ Number must start with + (country code).";
-    return;
-  }
-  if (!message) {
-    status.textContent = "❌ Message cannot be empty.";
-    return;
-  }
-
-  status.textContent = "💬 Sending message...";
-  try {
-    const res = await fetch("/message", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ to: phone, body: message })
-    });
-    const data = await res.json();
-    status.textContent = data.success
-      ? `✅ Message sent! SID: ${data.sid}`
-      : `❌ ${data.error}`;
-  } catch (err) {
-    status.textContent = "❌ " + err.message;
-  }
-});
-
-// Filter invalid characters
+// Only allow valid characters
 phoneInput.addEventListener("input", () => {
   phoneInput.value = phoneInput.value.replace(/[^0-9+*#]/g, "");
 });
