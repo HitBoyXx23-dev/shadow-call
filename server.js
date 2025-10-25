@@ -8,7 +8,7 @@ const PORT = 3000;
 
 // ⚠️ Replace with your actual Twilio credentials
 const TWILIO_ACCOUNT_SID = "ACb058dcd05e61b1a09216725f00ad05a8";
-const TWILIO_AUTH_TOKEN = "91416eac859c3a0c038376ba58bc47ee";
+const TWILIO_AUTH_TOKEN = "fda58eb049b602763fe6467b369e7fe9";
 const TWILIO_NUMBER = "+18137983375"; // Your Twilio phone number
 
 const twilio = new Twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
