@@ -36,7 +36,7 @@ app.post("/call", async (req, res) => {
     const call = await twilio.calls.create({
       to,
       from: TWILIO_NUMBER,
-      twiml: `<Response><Say voice="Polly.Joanna">Shadow Call says: ${say}</Say></Response>`
+      twiml: `<Response><Say voice="Polly.Matthew">Shadow Call says: ${say}</Say></Response>`
     });
     res.json({ success: true, sid: call.sid });
   } catch (err) {
